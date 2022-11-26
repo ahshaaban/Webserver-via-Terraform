@@ -25,11 +25,10 @@ resource "azurerm_resource_group" "rg" {
 
 # Create a virtual network
 resource "azurerm_virtual_network" "vnet" {
-  name                = web-srv-vnet
+  name                = "web-srv-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = var.location
   resource_group_name = var.resource_group_name
-
 }
 
 # Create a sunbet
@@ -40,23 +39,6 @@ resource "azurerm_subnet" "subnetl" {
   virtual_network_name = azurerm_virtual_network.vnet.name   # create dependancy to VNET
   address_prefixes     = ["10.0.2.0/24"]
 }
-
-#Create NIC
-
-resource "azurerm_network_interface" "nic" {
-  name                = "web-srv-nic"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-
-  ip_configuration {
-    name                          = "ipconfig1"
-    subnet_id                     = azurerm_subnet.subnetl.id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-
-
-
 
 #Create Public IP address
 
@@ -85,7 +67,6 @@ resource "azurerm_network_interface" "nic" {
  }
 
 resource "azurerm_lb_probe" "LBbrobe" {
-  resource_group_name = var.azurerm_resource_group
   loadbalancer_id     = azurerm_lb.LB.id
   name                = "ssh-running-probe"
   port                = var.application_port
@@ -93,13 +74,12 @@ resource "azurerm_lb_probe" "LBbrobe" {
 
 
 resource "azurerm_lb_rule" "lbnatrule" {
-  resource_group_name            = var.resource_group_name
   loadbalancer_id                = azurerm_lb.LB.id
   name                           = "http"
   protocol                       = "Tcp"
   frontend_port                  = var.application_port
   backend_port                   = var.application_port
-  backend_address_pool_id        = azurerm_lb_backend_address_pool.Bpool.id
+  backend_address_pool_ids        = [azurerm_lb_backend_address_pool.Bpool.id]
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = azurerm_lb_probe.LBbrobe.id
 }
@@ -109,7 +89,7 @@ data "azurerm_resource_group" "image" {
 }
 
 data "azurerm_image" "image" {
-  name                = var.packer_image_name
+  name                = var.managed_image_name
   resource_group_name = data.azurerm_resource_group.image.name
 }
 
@@ -152,10 +132,12 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   os_profile_linux_config {
     disable_password_authentication = true
 
-    ssh_keys {
-      path     = "/home/azureuser/.ssh/authorized_keys"
-      key_data = file("~/.ssh/id_rsa.pub")
-    }
+    
+   ### ssh_keys {
+    ###  path     = "/home/azureuser/.ssh/authorized_keys"
+     ### key_data = file("~/.ssh/id_rsa.pub")
+   ### }
+    
   }
 
   network_profile {
@@ -164,45 +146,15 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ip_configuration {
       name                                   = "IPConfiguration"
-      subnet_id                              = azurerm_subnet.vmss.id
+      subnet_id                              = azurerm_subnet.subnetl.id
       load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.Bpool.id]
       primary = true
     }
   }
   
-  tags = var.tags
 }
 
 
-
-resource "network-security-group" "nsg" {
-
- 
-  resource_group_name   = var.azurerm_resource_group
-  security_group_name   = "nsg"
-  source_address_prefix = ["10.0.0.0/26"]
-
-  custom_rules = [
-
-    {
-      name                    = "allowinternet"
-      priority                = 100
-      direction               = "Inbound"
-      access                  = "Allow"
-      protocol                = "*"
-      source_port_range       = "*"
-      destination_port_range  = "*"
-      source_address_prefixes = "0.0.0.0"
-      description             = "allowinterntetInbound"
-    },
-  ]
-
-  tags = {
-    environment = "production"
-  }
-
-  depends_on = [var.azurerm_resource_group]
-}
 
 
 

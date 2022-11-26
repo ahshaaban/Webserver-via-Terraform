@@ -1,19 +1,22 @@
 
 
  variable "location" {
+  type = string
   default = "West Europe"
  }
-
+variable "resource_group_name" {
+  type = string
+  default = "web-srv-rg"
+}
 variable "application_port" {
   default = "80"
 }
 
-variable "resource_group_name" {
-  default = "web-srv-rg"
-}
+
 
 variable "packer_resource_group_name" {
-  default = "ODL-clouddevops-216708"
+  type = string
+  default = "ODL-clouddevops-216720"
 }
 
 
@@ -22,9 +25,9 @@ variable "managed_image_name" {
 }
 
 variable "admin_user" {
-    default = admin_user
+    default = "admin_user22"
   
 }
 variable "admin_password" {
-  default = admin_password
+  default = "admin_password22"
 }

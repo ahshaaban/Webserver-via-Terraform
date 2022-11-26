@@ -6,16 +6,16 @@
 	},
 	"builders": [{
 		"type": "azure-arm",
-    "client_id": "21970b85-eb26-4248-aed2-2007df113c4f",
-    "client_secret": "6gd8Q~z98D0ponirVrKuLLw~i49rWbkTU1dDcbJJ",
-    "subscription_id": "e2bf10f5-b611-44c7-9617-4a26610fc460",
+    "client_id": "117ba615-57b5-4739-b1d1-ac3e14647d22",
+    "client_secret": "~JQ8Q~lV6jalmt-Ad6WMC-yDf9D.2CG3HzVF8dty",
+    "subscription_id": "51003162-956a-4e6f-877b-3d0d913c7ca1",
  
     "os_type": "Linux",
     "image_publisher": "Canonical",
     "image_offer": "UbuntuServer",
     "image_sku": "18.04-LTS",
  
-    "managed_image_resource_group_name": "ODL-clouddevops-216708",
+    "managed_image_resource_group_name": "ODL-clouddevops-216720",
     "managed_image_name": "myPackerImage",
  
     "location": "East US",
