@@ -14,7 +14,7 @@ variable "resource_group_name" {
 
 variable "resource_group_name" {
 
-    packer_resource_group_name = "ODL-clouddevops-216126"
+    packer_resource_group_name = "ODL-clouddevops-216708"
   
 }
 
