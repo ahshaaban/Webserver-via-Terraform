@@ -2,7 +2,7 @@
 # Configure the Azure provider
 terraform {
   required_providers {
-    azure = {
+    azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.32.0"
     }
@@ -175,7 +175,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
 
 
-module "network-security-group" {
+resource "network-security-group" {
   source                = "Azure/network-security-group/azurerm"
   resource_group_name   = var.azurerm_resource_group
   security_group_name   = "nsg"
