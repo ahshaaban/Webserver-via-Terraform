@@ -5,7 +5,7 @@
  }
 
 variable "application_port" {
-  Default = "80"
+  default = "80"
 }
 
 variable "resource_group_name" {
