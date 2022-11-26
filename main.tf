@@ -175,7 +175,8 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
 
 
-resource "network-security-group" {
+resource "network-security-group" "nsg" {
+
   source                = "Azure/network-security-group/azurerm"
   resource_group_name   = var.azurerm_resource_group
   security_group_name   = "nsg"
