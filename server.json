@@ -15,7 +15,7 @@
     "image_offer": "UbuntuServer",
     "image_sku": "18.04-LTS",
  
-    "managed_image_resource_group_name": "ODL-clouddevops-216126",
+    "managed_image_resource_group_name": "ODL-clouddevops-216708",
     "managed_image_name": "myPackerImage",
  
     "location": "East US",
