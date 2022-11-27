@@ -32,6 +32,6 @@ variable "admin_password" {
   default = "Password_user22" ## password for vms in terraform file
 }
 
-variable "count" {
-  default = 2
+variable "nr" {
+  default = "2"
 }

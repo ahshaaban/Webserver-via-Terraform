@@ -41,21 +41,21 @@ resource "azurerm_subnet" "subnetl" {
 }
 resource "azurerm_network_security_group" "nsg" {
   name                = "websrvnsg"
-  location            = azurerm_resource_group.var.location
-  resource_group_name = azurerm_resource_group.var.resource_group_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
 }
  
 resource "azurerm_network_security_rule" "internet_deny" {
   name                        = "DenyallfromInternet"
   priority                    = 500
   direction                   = "Inbound"
-  access                      = "deny"
+  access                      = "Deny"
   protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.var.resource_group_name
+  resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
@@ -63,39 +63,39 @@ resource "azurerm_network_security_rule" "allow" {
   name                        = "allowinside"
   priority                    = 400
   direction                   = "Inbound"
-  access                      = "allow"
+  access                      = "Allow"
   protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = "*"
   source_address_prefix       = "10.0.0.0/16"
   destination_address_prefix  = "10.0.0.0/16"
-  resource_group_name         = azurerm_resource_group.var.resource_group_name
+  resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 resource "azurerm_network_security_rule" "allowhttp" {
   name                        = "http"
   priority                    = 450
   direction                   = "Outbound"
-  access                      = "allow"
+  access                      = "Allow"
   protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = "*"
   source_address_prefix       = "10.0.0.0/16"
   destination_address_prefix  = "10.0.0.0/16"
-  resource_group_name         = azurerm_resource_group.var.resource_group_name
+  resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-resource "azurerm_network_security_rule" "allowhttp" {
+resource "azurerm_network_security_rule" "allowLB" {
   name                        = "AllowHttpfromLB"
   priority                    = 300
   direction                   = "Inbound"
-  access                      = "allow"
+  access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "80"
   source_address_prefix       = azurerm_public_ip.pip.name
   destination_address_prefix  = "10.0.0.0/16"
-  resource_group_name         = azurerm_resource_group.var.resource_group_name
+  resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
@@ -161,7 +161,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   sku {
     name     = "Standard_DS1_v2"
     tier     = "Standard"
-    capacity = var.count
+    capacity = var.nr
   }
 
   storage_profile_image_reference {
