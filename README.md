@@ -33,7 +33,7 @@ In order to build the project, make sure you have:
       
 
 **2. Create the infrastructure using Terraform.**
-	    Now you're ready to create the infrastructure for the application to run on. Here are the main steps: 
+Now you're ready to create the infrastructure for the application to run on. Here are the main steps: 
   * Create a Resource Group. 
   * Create a Virtual network and a subnet on that virtual network.
   * Create a Network Security Group. Ensure that you explicitly allow access to other VMS on 
