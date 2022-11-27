@@ -16,7 +16,7 @@ variable "application_port" {
 
 variable "packer_resource_group_name" {
   type = string
-  default = "ODL-clouddevops-216720"
+  default = "xxxxxx" ## resource group in server.json
 }
 
 
@@ -25,9 +25,9 @@ variable "managed_image_name" {
 }
 
 variable "admin_user" {
-    default = "admin_user22"
+    default = "xxxxx" ## user name for vms in terrafrom file
   
 }
 variable "admin_password" {
-  default = "admin_password22"
+  default = "xxxxxx" ## password for vms in terraform file
 }
