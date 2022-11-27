@@ -1,6 +1,6 @@
 
 ## Introduction
-In this project, you will build a webserver behind a publib loadbalancer. Webserver will be deployed  in VMSS backendpool. VMs will be linux-based taken from packer image.
+In this project, you will build a webserver behind a public loadbalancer. Webserver will be deployed  in VMSS backendpool. VMs will be linux-based taken from packer image.
 
 ## Getting Started
 Before you start, you will need to:
