@@ -28,24 +28,20 @@ In order to build the project, make sure you have:
         "inline": [
 			"echo 'Hello, World!' > index.html",
 			"nohup busybox httpd -f -p 80 &"],"inline_shebang": "/bin/sh -x","type": "shell"
-    - Ensure that the resource group you specify in Packer for the image is the same image specified in Terraform 
+    - Ensure that the resource group you specify in Packer for the image is the same image specified in Terraform.
+    - Run ```packer build``` on your packer template.
+  
             
       
 
 **2. Create the infrastructure using Terraform.**
 Now you're ready to create the infrastructure for the application to run on. Here are the main steps: 
-  * Create a Resource Group. 
-  * Create a Virtual network and a subnet on that virtual network.
-  * Create a Network Security Group. Ensure that you explicitly allow access to other VMS on 
-	the subnet and deny direct access from the internet.
-  * Create a Network Interface with Public IP. 
-  * Create a Load Balancer. Your load balancer will need a backend address pool and address 
-	pool association for the network interface and the load balancer. 
-  * Create a virtual machine availability set. 
-  * Create virtual machines. Make sure you use the image you deployed using Packer! 
-  * Create managed disks for our virtual machines. 
-  * Ensure a variables file allows for customer
-  * configure the number of virtual machines and the deployment at a minimum. 
+ * Download the files in your working directory.
+  * Opend bash shell command or Azure Shell
+  * Run ```Terraform plan``` to make sure the configuration is all ready to be deployed.
+  * If you get ```Success message```, you are ready for the next step. Otherwise follow the inustrctions to solve the errors.
+  * Run ```Terraform apply``` to deploy the infrastructre.
+
   
 **3. Deploying Your Infrastructure**
    It is time to deploy! be sure to do the following:

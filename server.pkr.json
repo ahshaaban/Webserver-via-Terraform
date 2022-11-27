@@ -6,16 +6,16 @@
 	},
 	"builders": [{
 		"type": "azure-arm",
-    "client_id": "xxxxxxxxxxxxxxxx", ## your application ID
-    "client_secret": "xxxxxxxxx", ## your service principal
-    "subscription_id": "xxxxxxxxxxx", ## your subscribtio ID
+    "client_id": "d055b9d4-3dfd-4e94-8245-b2e856231623", ## Your application ID
+    "client_secret": "Myt8Q~npPai4MjUV1PGyhBYbTYihSGlqCYtnna28", ## Your Secret Key
+    "subscription_id": "dfbd8d6e-c77f-414e-a3f4-14c567b43de3", ## Your subscribtion ID
  
     "os_type": "Linux",
     "image_publisher": "Canonical",
     "image_offer": "UbuntuServer",
     "image_sku": "18.04-LTS",
  
-    "managed_image_resource_group_name": "xxxxxxx",
+    "managed_image_resource_group_name": "ODL-clouddevops-216778",
     "managed_image_name": "myPackerImage",
  
     "location": "East US",
